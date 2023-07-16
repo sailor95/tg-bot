@@ -1,7 +1,7 @@
 const { Telegraf } = require('telegraf');
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
-const bot = new Telegraf(process.env.TG_KEY);
+const bot = new Telegraf(process.env.TUTOR_BOT_KEY);
 
 bot.use((ctx, next) => {
   ctx.reply('You used the bot');
