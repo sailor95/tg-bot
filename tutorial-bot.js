@@ -3,10 +3,17 @@ require('dotenv').config();
 
 const bot = new Telegraf(process.env.TG_KEY);
 
+bot.use((ctx, next) => {
+  ctx.reply('You used the bot');
+  ctx.state.apple = 5;
+  next(ctx);
+});
+
 bot.start(ctx => {
   ctx.reply(
-    `${ctx.from.first_name} have entered the start command, good job! ${ctx.updateType}`
+    `${ctx.from.first_name} has entered the start command, good job! TYPE: ${ctx.updateType}`
   );
+  ctx.reply(`${ctx.from.first_name} has ${ctx.state.apple} apples`);
 });
 
 bot.help(ctx => {
@@ -41,10 +48,6 @@ bot.phone('+1 730 263-4233', ctx => {
 // #hash
 bot.hashtag('hash', ctx => {
   ctx.reply('Hashtag method');
-});
-
-bot.use(ctx => {
-  ctx.reply('You used the bot');
 });
 
 bot.launch();
