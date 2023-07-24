@@ -26,6 +26,7 @@ bot.use(async (ctx, next) => {
 bot.api.setMyCommands([
   { command: 'start', description: 'Start the bot' },
   { command: 'help', description: 'Show help text' },
+  { command: 'love', description: '{A} loves {B}' },
 ]);
 
 bot.command('start', async ctx => {
@@ -44,11 +45,23 @@ Here is all the commands:
 
 \\- /start: Start the bot
 \\- /help: Show hints
+\\- /love: \_\\{A\\}\_ loves \_\\{B\\}\_
   `;
 
   ctx.reply(text, {
     parse_mode: 'MarkdownV2',
   });
+});
+
+bot.command('love', ctx => {
+  const item = ctx.match;
+  ctx.reply(
+    `${item.split(' ')[0]} loves \|\|${item
+      .split(' ')
+      .splice(1)
+      .join(' ')}\|\|`,
+    { parse_mode: 'MarkdownV2' }
+  );
 });
 
 bot.on('message:text').filter(
