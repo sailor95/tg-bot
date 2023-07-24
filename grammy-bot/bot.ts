@@ -23,11 +23,31 @@ bot.use(async (ctx, next) => {
   await next();
 });
 
+bot.api.setMyCommands([
+  { command: 'start', description: 'Start the bot' },
+  { command: 'help', description: 'Show help text' },
+]);
+
 bot.command('start', async ctx => {
   // prettier-ignore
   await ctx.reply('Welcome\\! *Up* __and__ _running_\\.', {
     parse_mode: 'MarkdownV2',
     reply_markup: {force_reply: true}
+  });
+});
+
+bot.command('help', ctx => {
+  const text = `
+  Welcome\\!
+
+Here is all the commands:
+
+\\- /start: Start the bot
+\\- /help: Show hints
+  `;
+
+  ctx.reply(text, {
+    parse_mode: 'MarkdownV2',
   });
 });
 
