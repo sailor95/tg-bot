@@ -30,7 +30,7 @@ bot.command('start', async ctx => {
     reply_markup: {force_reply: true}
   });
 });
-bot.on('message', async ctx => {
+bot.on('message:text', async ctx => {
   const withStart = await ctx.hasCommand('start');
   console.log('With command start?', withStart);
 
@@ -41,6 +41,10 @@ bot.on('message', async ctx => {
   await ctx.reply(isAdmin ? `Oh mighty <b style="color:red;">Admin</b>! ${text}` : text, {
     parse_mode: 'HTML',
   });
+});
+
+bot.on('message:photo', ctx => {
+  ctx.reply('Good photo!');
 });
 
 bot.start();
