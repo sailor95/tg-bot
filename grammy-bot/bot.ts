@@ -41,7 +41,9 @@ composer.use(async (ctx, next) => {
   console.log('Middleware B');
   await next();
 });
-bot.errorBoundary(boundaryHandler /** Q */).use(composer);
+
+// Q stand for other middleware
+bot.errorBoundary(boundaryHandler /** , Q */).use(composer);
 
 /**
  * Error in Q, A, or B
